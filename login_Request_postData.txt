@@ -1,0 +1,167 @@
+登陆
+
+requestData=
+            {"api_name":"api.hzpt.user.login",
+             "api_Channel":"1",
+             "user_type":"2",
+             "app_key":"ZW5sNWVWOWhibVJ5YjJsaw==",
+             "app_id":"hzpt_android",
+             "params":{
+                       "id_card_type":"SFZ",
+                       "password":"5149439ed35526847633c8267036cc87652a52f14a93dd6991a23ac1c38f2ee0",
+                       "english":0,
+                       "login_name":"339005198307244812"
+                      },
+             "client_mobile":"866152020522795",
+             "client_version":"1.6.6"
+             }
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+是否为医院黑名单客户
+
+requestData=
+{
+   "session_id":"b8b84e9d1b71e24b03bd3432ce3a408c2bdeb7b87b2e201392f322f26e10e28e",
+   "api_name":"api.appointment.black",
+   "api_Channel":"1",
+   "user_type":"2",
+   "app_key":"ZW5sNWVWOWhibVJ5YjJsaw==",
+   "app_id":"hzpt_android",
+   "params":{
+              "english":0,
+              "hospital_id":630
+             },
+   "client_mobile":
+   "866152020522795",
+   "client_version":"1.6.6"
+}
+
+-----------------------------------------------------------------------------------------------------------------
+按医院查询日期
+
+requestData=
+    {       
+     "session_id":"268a112a6cd030d6b82b2b49807e9289f3edaa897c90a3267a5cf38fe1c8d34a",
+     "api_name":"api.appointment.date.list",
+     "api_Channel":"1",
+     "user_type":"2",
+     "app_key":"ZW5sNWVWOWhibVJ5YjJsaw==",
+     "app_id":"hzpt_android",
+     "params":{
+                 "page_size":2147483647,
+                 "english":0, 
+                 "hospital_id":630,
+                 "page_no":1
+            },
+     "client_mobile":"866152020522795",
+     "client_version":"1.6.6"
+      }
+
+
+-----------------------------------------------------------------------------------------------------------------
+按日期查询科室
+
+requestData=
+{
+"session_id":"268a112a6cd030d6b82b2b49807e9289f3edaa897c90a3267a5cf38fe1c8d34a",
+"api_name":"api.appointment.dept.list",
+"api_Channel":"1",
+"user_type":"2",
+"app_key":"ZW5sNWVWOWhibVJ5YjJsaw==",
+"app_id":"hzpt_android",
+"params":{
+         "page_size":2147483647,
+         "page_no":1,
+         "clinic_type":"4",
+         "english":0,
+         "hospital_id":630,
+         "clinic_date":"2017-11-07"
+          },
+"client_mobile":"866152020522795",
+"client_version":"1.6.6"}
+
+
+-----------------------------------------------------------------------------------------------------------------
+按科室查询医生
+
+requestData=
+{
+   "session_id":"268a112a6cd030d6b82b2b49807e9289f3edaa897c90a3267a5cf38fe1c8d34a",
+   "api_name":"api.appointment.doctor.list",
+   "api_Channel":"1",
+   "user_type":"2",
+   "app_key":"ZW5sNWVWOWhibVJ5YjJsaw==",
+   "app_id":"hzpt_android",
+   "params":{
+             "page_size":2147483647,
+             "page_no":1,
+             "dept_name":"肾病科门诊",
+             "english":0,
+             "hospital_id":630,
+             "dept_code":"2040100"
+             },
+   "client_mobile":"866152020522795",
+   "client_version":"1.6.6"
+}
+
+
+-----------------------------------------------------------------------------------------------------------------
+根据医生查询号源
+
+requestData=
+{
+   "session_id":"268a112a6cd030d6b82b2b49807e9289f3edaa897c90a3267a5cf38fe1c8d34a",
+   "api_name":"api.appointment.doctor.schedule.new",
+   "api_Channel":"1",
+   "user_type":"2",
+   "app_key":"ZW5sNWVWOWhibVJ5YjJsaw==",
+   "app_id":"hzpt_android",
+   "params":
+          {
+            "page_size":2147483647,
+            "page_no":1, 
+            "dept_name":"肾病科门诊",
+            "doctor_code":"80",
+            "english":0,
+            "hospital_id":630,
+            "dept_code":"2040100"
+           },
+   "client_mobile":"866152020522795",
+   "client_version":"1.6.6"}
+
+-----------------------------------------------------------------------------------------------------------------
+预约
+
+requestData=
+{
+   "session_id":"76828653d9c290de09e1a677362c9c280886d1db84db7f1d177be7e29cb93c29",
+   "api_name":"api.appointment.new",
+   "api_Channel":"1",
+   "user_type":"2",
+   "app_key":"ZW5sNWVWOWhibVJ5YjJsaw==",
+   "app_id":"hzpt_android",
+   "params":
+            { 
+               "clinic_no":"12",
+               "clinic_time":"11:00-11:30",
+               "card_id":149432,
+               "english":0,
+               "hospital_id":630,
+               "clinic_bc":"1"
+             },
+   "client_mobile":"866152020522795",
+   "client_version":"1.6.6"
+}
+
+
+
+
+
+
+
+=============================================================================================================================================================
+
+

@@ -2,14 +2,16 @@ import requests
 import pprint
 import json
 import os
+import hashlib
 from urllib.parse import quote,urlencode
 
 
 
 
 class api():
-    def __init__(self, username):
+    def __init__(self, username,password):
         self.username = username
+        self.password= hashlib.sha256(password.encode('utf_8')).hexdigest()
         self.conn = requests.session()
         self.customInfo=""
         self.hospital_id=630
@@ -27,9 +29,10 @@ class api():
         url = 'http://app.hzwsjsw.gov.cn/api/exec.htm'
         # 参数：
         # --------------------------------
-        hospital_id=630
-        login_name=self.get_user_Login_Info()['login_name']
-        password = self.get_user_Login_Info()['password']
+       # login_name=self.get_user_Login_Info()['login_name']
+       # password = self.get_user_Login_Info()['password']
+        login_name=self.username
+        password=self.password
         # --------------------------------
         headers = {
             "Accept": "application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5",
@@ -271,7 +274,7 @@ class api():
         file_object.close()
         return True
 
-a=api("高麟琪")
+a=api("339005198307244812","615919")
 '''
 if a.login():
     print('登陆成功')
@@ -279,4 +282,6 @@ print(a.session_id)
 '''
 if a.logFromSession():
     print('从Session登陆成功')
+
 a.dept()
+a.doctor()

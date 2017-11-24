@@ -1,6 +1,7 @@
 import requests
 import pprint
 import json
+import os
 from urllib.parse import quote,urlencode
 
 
@@ -12,6 +13,7 @@ class api():
         self.conn = requests.session()
         self.customInfo=""
         self.hospital_id=630
+        self.session_id=""
 
     def get_user_Login_Info(self):
         postDataList = {
@@ -45,7 +47,20 @@ class api():
         logResult = json.loads(response.text)
         if logResult['return_params']['ret_info']=='登陆成功':
             self.customInfo=logResult
+            self.session_id=logResult['return_params']['session_id']
+            self.writeSession(self.session_id)
             return True
+        else:
+            return False
+
+    def logFromSession(self):
+        if self.readSession():
+            hosp=self.hospital()
+
+            if "return_code" in hosp and hosp["return_code"]==401:
+                return self.login()
+            else:
+                return True
         else:
             return False
 
@@ -60,7 +75,8 @@ class api():
               "hospital_id":hospital_id # 必要参数
              }
         reDict=self.post(appURL,postDataDict)
-        pprint.pprint(reDict)
+        # pprint.pprint(reDict)
+        return reDict
 
     def date(self):
         # 参数：
@@ -81,7 +97,7 @@ class api():
         # 参数：
         # --------------------------------
         hospital_id=630
-        clinic_date="2017-11-07"
+        clinic_date="2017-11-25"
         # --------------------------------
         appURL="api.appointment.dept.list"
         postDataDict={
@@ -193,10 +209,16 @@ class api():
         for key,value in postDataDict.items():
             postStrEncode=postStrEncode+str(key)+'%22%3A'+str(value)+'%2C%22'
         postStrEncode=postStrEncode[0:-6]
-
+        '''
         postDataHeader ="requestData=%7B%22api_name%22%3A%22" + appURL + "%22%2C%22" + \
                          "api_Channel%22%3A%221%22%2C%22user_type%22%3A%222%22%2C%22app_key%22%3A%22ZW5sNWVWOWhibVJ5YjJsaw%3D%3D%22%2C%22app_id%22%3A%22hzpt_android%22%2C%22" + \
+                         "params%22%3A%7B%22" 
+        
+        '''
+        postDataHeader = "requestData=%7B%22session_id%22%3A%22"+self.session_id+"%22%2C%22api_name%22%3A%22"+str(appURL)+"%22%2C%22" + \
+                         "api_Channel%22%3A%221%22%2C%22user_type%22%3A%222%22%2C%22app_key%22%3A%22ZW5sNWVWOWhibVJ5YjJsaw%3D%3D%22%2C%22app_id%22%3A%22hzpt_android%22%2C%22" + \
                          "params%22%3A%7B%22"
+
         postDataTail="%7D%2C%22client_mobile%22%3A%22866152020522795%22%2C%22client_version%22%3A%221.6.6%22%7D"
         postData=postDataHeader+postStrEncode+postDataTail
         print(postData)
@@ -212,7 +234,7 @@ class api():
             "Host": "app.hzwsjsw.gov.cn"
         }
         response = conn.post(url=url, data=postData, headers=headers)
-        logResult = json.loads(response.text)
+        logResult =response.json()
         return logResult
 
     def test(self):
@@ -227,7 +249,34 @@ class api():
            }
         self.post(appURL,postDataDict)
 
+    def readSession(self):
+        result=""
+        fileURL='session/'+self.username+'.txt'
+        if not os.path.exists(fileURL):
+            print('没有' + self.username + '的session文件')
+            return False
+        f = open(fileURL)  # 返回一个文件对象
+        line = f.readline()  # 调用文件的 readline()方法
+        while line:
+            result=result+line
+            line = f.readline()
+        f.close()
+        self.session_id=result
+        return True
+
+    def writeSession(self,session):
+        fileURL = 'session/' + self.username + '.txt'
+        file_object = open(fileURL, 'w')
+        file_object.write(session)
+        file_object.close()
+        return True
 
 a=api("高麟琪")
+'''
 if a.login():
     print('登陆成功')
+print(a.session_id)
+'''
+if a.logFromSession():
+    print('从Session登陆成功')
+a.dept()
